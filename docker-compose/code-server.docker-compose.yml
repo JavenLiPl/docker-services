@@ -1,0 +1,18 @@
+version: "2.1"
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - PROXY_DOMAIN=code-server.docker
+      - DEFAULT_WORKSPACE=/config/workspace
+      - 'EXTENSIONS_GALLERY={"serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery"}'
+      - DOCKER_MODS=linuxserver/mods:code-server-golang|linuxserver/mods:code-server-java11|linuxserver/mods:code-server-ssl
+    volumes:
+      - /home/javen/code-server:/config
+    ports:
+      - 8443:8443
+    restart: unless-stopped
